@@ -109,3 +109,29 @@ VALUES
         '2023-04-03',
         '789 Maple Ave, Village, Region'
     );
+
+-- Script to create new order
+start transaction;
+
+SELECT
+    *
+FROM
+    Products p
+WHERE
+    product_id = 1 FOR
+UPDATE
+;
+
+UPDATE
+    Products
+SET
+    quantity = quantity - 1
+WHERE
+    product_id = 1;
+
+INSERT INTO
+    Orders (user_id, product_id, order_date)
+VALUES
+    (1, 1, CURRENT_DATE());
+
+commit;
